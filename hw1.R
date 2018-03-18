@@ -12,28 +12,33 @@ eigen(A)
 #3 spectral decomposition
 P <-eigen(A)$vectors
 E <-diag(eigen(A)$values)
-P
-E
+P%*%E%*%t(P)
+#4 trace(A)
+sum(diag(A))
+
+#5 A inverse
+A.inv<-solve(A)
+A.inv
+#6 eigenvalues, eigenvectors A inverse
+eigen(A.inv)
+#7 spectral decomposition
+P <-eigen(A.inv)$vectors
+E <-diag(eigen(A.inv)$values)
 P%*%E%*%t(P)
 
-#4 trace(A)
-diag(A)
-#5 A inverse
-E.inv <- diag(1/eigen(A)$values)
-E.inv
-#6 eigenvalues, eigenvectors A inverse
-eigen(E.inv)
-#7 spectral decomposition
-P%*%E.inv%*%t(P)
-#8
+
+#8 AA'
 B<- A%*%t(A)
 B
-#9 
+#9 eigenvalues and eigenvectors of AA'
 eigen(B)
-#10
-diag(1/eigen(B)$values)
-#11
+
+#10 inverse of AA'
+solve(B)
+#11 AA
 C<- A%*%A
 C
-#12
-P%*%C%*%t(P)
+#12 spectral decomposition of AA
+P <-eigen(C)$vectors
+E <-diag(eigen(C)$values)
+P%*%E%*%t(P)
